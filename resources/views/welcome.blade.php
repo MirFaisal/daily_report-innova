@@ -2,7 +2,7 @@
 <div class="w-50 mx-auto p-5 border">
     <div class="d-flex pb-2 justify-content-between border-bottom">
         <h3>
-            {{auth()->user()->user_type == 'Admin' ? 'All Reports' : 'My Reports' }}
+            {{auth()->user()->user_type == 'Admin' ? 'All Reports' : 'My Reports auth()->user()->name' }}
         </h3>
         <a class="btn btn-primary" href="{{ route('REPORT::CREATE::VIEW') }}">
             <?php $today =  \Carbon\Carbon::now()->format('M d, Y') ?>
