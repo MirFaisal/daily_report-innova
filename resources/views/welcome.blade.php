@@ -1,8 +1,12 @@
-@extends('layouts.master') @section('content')
+@extends('layouts.master')
+<?php $userName = auth()->user()->name; ?> @section('PageTitle')
+{{auth()->user()->user_type == 'Admin' ? 'All Reports' : "$userName's Daily Reports..."  }}
+@endsection @section('content')
 <div class="w-50 mx-auto p-5 border">
     <div class="d-flex pb-2 justify-content-between border-bottom">
         <h3>
-            {{auth()->user()->user_type == 'Admin' ? 'All Reports' : 'My Reports auth()->user()->name' }}
+            <?php $userName = auth()->user()->name; ?>
+            {{auth()->user()->user_type == 'Admin' ? 'All Reports' : "$userName's Daily Reports..."  }}
         </h3>
         <a class="btn btn-primary" href="{{ route('REPORT::CREATE::VIEW') }}">
             <?php $today =  \Carbon\Carbon::now()->format('M d, Y') ?>
@@ -12,6 +16,7 @@
     <div class="mt-5">
         <div class="mt-5">
             @if(!empty($currentUserReportDate) || !empty($reportDate))
+
             <table class="table">
                 <thead>
                     <tr>
@@ -25,10 +30,13 @@
                 <tbody>
                     @if(Auth()->user()->user_type == 'Admin')
                     @foreach($reportDate as $key => $report)
+                    <?php $carbonDate = \Carbon\Carbon::parse($report->report_date);
+                    ?>
                     <tr>
                         <th scope="row">{{ $key + 1 }}</th>
                         <td>
-                            {{$report->created_at->format('j F, Y')}}
+                            {{ $carbonDate->format('l') }} -
+                            {{ $carbonDate->format('M d, Y') }}
                         </td>
                         <td>
                             <div class="d-flex justify-content-end">
@@ -44,9 +52,14 @@
                     @endforeach
                     <div></div>
                     @else @foreach($currentUserReportDate as $key => $report)
+                    <?php $carbonDate = \Carbon\Carbon::parse($report->report_date);
+                    ?>
                     <tr>
                         <th scope="row">{{ $key + 1 }}</th>
-                        <td>{{$report->created_at->format('j F, Y')}}</td>
+                        <td>
+                            {{ $carbonDate->format('l') }} -
+                            {{ $carbonDate->format('M d, Y') }}
+                        </td>
                         <td>
                             <div class="d-flex justify-content-end">
                                 <a

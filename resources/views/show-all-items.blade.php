@@ -48,8 +48,10 @@
                         </td>
                     </form>
                 </tr>
+
+                @endif
                 <?php $totalReportItems = count($reportItems); ?>
-                @endif @foreach($reportItems as $key => $reportItem)
+                @foreach($reportItems as $key => $reportItem)
                 <tr>
                     <th scope="row">{{ $totalReportItems - $key }}</th>
                     <td>{{$reportItem->content}}</td>

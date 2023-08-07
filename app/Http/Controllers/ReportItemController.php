@@ -39,7 +39,9 @@ class ReportItemController extends Controller
 
         $reportItems = ReportItem::where('report_date_id', $request->report_date_id)->orderBy('id', 'DESC')->get();
         $reportDate = new Carbon($report->report_date);
-        
+
+        //dd($reportItems);
+
 
         return view('show-all-items', [
             'report' => $report,

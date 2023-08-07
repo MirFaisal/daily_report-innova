@@ -98,16 +98,18 @@ class ReportDateController extends Controller
     function result(Request $request)
     {
 
-        if (auth()->user()->user_type = 'Admin') {
-            $report = ReportDate::where('user_id', $request->operator)->get();
-            $reports = $report->whereBetween('report_date', [$request->from, $request->to]);
-        }
-        dd($reports);
+        $reports = ReportDate::where('user_id', $request->operator)
+            ->whereBetween('report_date', [$request->from, $request->to])
+            ->orderBy('report_date', 'DESC')
+            ->get();
+
+        $user = User::where('id', $request->operator)->first();
+
 
         $from = $request->from;
         $to = $request->to;
 
-        return view('results', compact(['reports', 'from', 'to',]));
+        return view('results', compact(['user', 'reports', 'from', 'to',]));
     }
 
 }
