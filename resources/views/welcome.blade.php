@@ -46,7 +46,7 @@
                     @else @foreach($currentUserReportDate as $key => $report)
                     <tr>
                         <th scope="row">{{ $key + 1 }}</th>
-                        <td>{{$report->createBy($report->user_id)}}</td>
+                        <td>{{$report->created_at->format('j F, Y')}}</td>
                         <td>
                             <div class="d-flex justify-content-end">
                                 <a
