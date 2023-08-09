@@ -37,11 +37,12 @@
                         />
                         <th scope="row">#</th>
                         <td>
-                            <input
+                            <textarea
+                                id="mytextarea"
                                 type="text"
                                 name="content"
                                 class="form-control"
-                            />
+                            ></textarea>
                         </td>
                         <td>
                             <button class="btn btn-success">+</button>
@@ -54,7 +55,7 @@
                 @foreach($reportItems as $key => $reportItem)
                 <tr>
                     <th scope="row">{{ $totalReportItems - $key }}</th>
-                    <td>{{$reportItem->content}}</td>
+                    <td>{!!html_entity_decode($reportItem->content)!!}</td>
                     @if($editable)
                     <td>
                         <a

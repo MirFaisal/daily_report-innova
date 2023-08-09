@@ -26,7 +26,8 @@
                 </h3>
                 @foreach($report->reportItems as $key => $reportItem)
                 <h5 style="margin-left: 20px">
-                    {{ $key + 1 }}. {{$reportItem->content}}
+                    {{ $key + 1 }}.
+                    {!!html_entity_decode($reportItem->content)!!}
                 </h5>
                 @endforeach
             </div>
